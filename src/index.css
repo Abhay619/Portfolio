@@ -1,13 +1,61 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body,
+html,
+:root{
+  @apply bg-black;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.font-jakarta{
+  font-family: "Plus Jakarta Sans", sans-serif;
+}
+
+.font-manrope{
+  font-family: "Manrope", sans-serif;
+}
+
+.font-cormorant{
+  font-family: "Cormorant Garamond", serif;
+  font-weight: 400;
+}
+
+.font-poppins{
+  font-family: 'Poppins',"Poppins Placeholder" , sans-serif;
+  font-size: medium;
+  font-weight: 400;
+}
+
+.experience:before{
+  content: "";
+  position: absolute;
+  height: 41%;
+  width: 2px;
+  border-radius: 5%;
+  background-color: white;
+  left: 2px;
+  top: 26px;
+
+}
+
+.milestones:before{
+  content: "";
+  position: absolute;
+  height: 12px;
+  width: 12px;
+  border-radius: 50%;
+  background-color: black;
+  left: -3px;
+  z-index: 10;
+  border: 3px solid white;
+  margin-top: 10px;
+}
+
+.mask{
+  mask-image: url('../public/font/mask.svg');
+  background-color: white;
+  mask-repeat: no-repeat;
+  mask-size: 40px;
+
 }
