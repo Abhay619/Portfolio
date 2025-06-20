@@ -84,7 +84,7 @@ const Header = () => {
             initial="closed"
             animate={isOpen ? "open" : "closed"}
             variants={sidebarVariants}
-            className={`fixed left-0 sm:hidden w-full h-screen bg-zinc-900 top-0 bottom-0 z-20 px-1 text-2xl`}>
+            className={`fixed left-0 sm:hidden w-full h-screen bg-zinc-900 top-0 bottom-0 z-30 px-1 text-2xl`}>
               <div className="border-b relative border-zinc-700 grid grid-flow-col mt-4 text-left mb-10">
                 <img
                   src="https://api.dicebear.com/9.x/lorelei/svg?seed=Andrea"
