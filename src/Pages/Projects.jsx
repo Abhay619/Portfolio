@@ -1,7 +1,7 @@
 import { motion } from "motion/react";
 import { twMerge } from "tailwind-merge";
 import Header from "../components/header";
-import Footer from "../components/Footer";
+import Footer from "../components/footer";
 import { projectData } from "../Data/project-details";
 import { FaArrowRightLong } from "react-icons/fa6";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
