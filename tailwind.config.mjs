@@ -1,13 +1,13 @@
  /** @type {import('tailwindcss').Config} */
  export default {
-  content: ["./src/**/*.{html,js,jsx}"],
+  content: ["./src/**/*.{html,js,jsx,tsx}"],
   theme: {
     extend: {
       animation: {
-        blink: "blink 1s step-start infinite",
+        blinks: "blink 1s step-start infinite",
       },
       keyframes: {
-        blink: {
+        blinks: {
           "0%, 100%": { opacity: "1" },
           "50%": { opacity: "0" },
         },

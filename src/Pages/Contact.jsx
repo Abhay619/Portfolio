@@ -1,13 +1,14 @@
 import { motion } from "motion/react";
 import { twMerge } from "tailwind-merge";
-import Header from "../Common/Header";
-import Footer from "../Common/Footer";
+import Header from "../components/header";
+import Footer from "../components/Footer";
 import { FiMail } from "react-icons/fi";
 import { IoCallOutline } from "react-icons/io5";
+import Orb from '../components/Orb';
 
 export default function Projects() {
   return (
-    <div className="cont bg-zinc-950 px-4 pt-8 pb-2 text-zinc-50">
+    <div className="cont bg-zinc-950 px-4 pt-8 pb-2 text-zinc-50 ">
       <Header />
       <motion.div
         initial="initial"
@@ -53,22 +54,30 @@ const Block = ({ className, ...rest }) => {
 };
 const ContactBlock = () => {
   return (
-    <Block className=" flex w-full flex-col-2 md:flex-row text-left gap-5 text-xl rounded-lg font-cormorant justify-around">
-      <div className="flex flex-col gap-4 items-start col-span-1">
-        <h2 className="text-6xl font-semibold self-start mb-2">
+    <Block className=" grid max-w-3xl mx-auto grid-cols-1 md:grid-cols-2 gap-8 font-montserrat justify-around min-h-screen items-center">
+      <div className="flex flex-col gap-4 items-start ">
+        <h2 className="text-4xl md:text-7xl font-semibold self-start mb-2">
           Reach <span className="text-zinc-400">Me</span>.
         </h2>
-        <p className="text-2xl font-jakarta">I would love to hear from you!!</p>
+        <p className="text-2xl font-jakarta text-blue-500">I would love to hear from you!!</p>
         <div className="flex flex-row gap-6 items-center font-jakarta">
           <p className="border p-2 rounded-full"><FiMail/></p>
           <p className="font-poppins">abhayk6190@gmail.com</p>
         </div>
         <div className="flex flex-row gap-6">
           <p className="border p-2 rounded-full"><IoCallOutline/></p>
-          <p className="font-poppins">+91 8303889702</p>
+          <p className="font-poppins text-xl">+91 8303889702</p>
         </div>
       </div>
-      <div className="min-h-[200px] w-[220px] border col-span-1 "></div>
+      <div className="relative h-full w-full">
+        <Orb
+    hoverIntensity={0.5}
+    rotateOnHover={true}
+    hue={0}
+    forceHoverState={false}
+  />
+  
+      </div>
     </Block>
   );
 };

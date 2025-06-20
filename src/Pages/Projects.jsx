@@ -1,14 +1,19 @@
 import { motion } from "motion/react";
 import { twMerge } from "tailwind-merge";
-import Header from "../Common/Header";
-import Footer from "../Common/Footer";
+import Header from "../components/header";
+import Footer from "../components/Footer";
 import { projectData } from "../Data/project-details";
 import { FaArrowRightLong } from "react-icons/fa6";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import {
+  AvatarGroup,
+  AvatarGroupTooltip,
+} from "@/components/animate-ui/components/avatar-group";
 
 export default function Projects() {
   return (
-    <div className="cont bg-zinc-950 px-4 pt-8 pb-2 text-zinc-50">
-      <Header/>
+    <div className="cont bg-zinc-950 px-4 pt-8 pb-2 text-zinc-50 min-h-screen">
+      <Header />
       <motion.div
         initial="initial"
         animate="animate"
@@ -17,13 +22,12 @@ export default function Projects() {
         }}
         className="mx-auto max-w-4xl grid grid-flow-dense grid-cols-12 gap-4"
       >
-        <ProjectBlock/>
+        <ProjectBlock />
       </motion.div>
-      
-      
-      <Footer/>
-      </div>
-  )
+
+      <Footer />
+    </div>
+  );
 }
 
 const Block = ({ className, ...rest }) => {
@@ -47,10 +51,7 @@ const Block = ({ className, ...rest }) => {
         stiffness: 400,
         damping: 50,
       }}
-      className={twMerge(
-        "col-span-4 rounded-lg  p-6 ",
-        className
-      )}
+      className={twMerge("col-span-4 rounded-lg  p-6 ", className)}
       {...rest}
     />
   );
@@ -66,19 +67,22 @@ const ProjectBlock = () => {
       scale: 1.2,
       transition: { type: "spring", stiffness: 300, damping: 10 },
     },
-    tap:{
+    tap: {
       rotate: -50,
       scale: 1.2,
       transition: { type: "spring", stiffness: 300, damping: 10 },
-    }
+    },
   };
   console.log(projectData.Technologies);
   return (
     <Block className="col-span-12 flex w-full flex-col text-left items-center gap-4 md:col-span-12 text-xl rounded-lg font-jakarta">
-      <h2 className="text-4xl font-semibold self-start">Projects<span className="inline-block animate-blink">_</span></h2>
+      <h2 className="text-4xl font-semibold self-start">
+        Projects<span className="inline-block animate-blink">_</span>
+      </h2>
       <span className="text-zinc-400 font-marope">
-         Here’s what I’ve been building — ideas turned into interactive, functional apps using my favorite tech stack.
-        </span>
+        Here’s what I’ve been building — <span className="text-blue-400">Ideas</span> turned into interactive,
+        functional apps using my favorite tech stack.
+      </span>
       <div className="flex flex-col w-full gap-8 my-6">
         {projectData.map((v, i) => {
           return (
@@ -115,11 +119,19 @@ const ProjectBlock = () => {
                   </h2>
                   {/* Tech stack badges */}
                   <div className="flex flex-wrap gap-2 mb-2 relative">
-                    {v.Technologies.map((Icon, i) => (
-                      <span className="bg-black w-10 justify-center text-md py-1 rounded flex items-center  ">
-                        <Icon />
-                      </span>
-                    ))}
+                    <AvatarGroup>
+                      {v.Technologies.map((technology, index) => (
+                        <Avatar key={index}>
+                          <span className="bg-black w-10 text-white justify-center text-md py-1 rounded flex items-center  ">
+                            <technology.icon />
+                          </span>
+
+                          <AvatarGroupTooltip>
+                            <p>{technology.tooltip}</p>
+                          </AvatarGroupTooltip>
+                        </Avatar>
+                      ))}
+                    </AvatarGroup>
                   </div>
 
                   <p className="text-sm text-zinc-400 text-wrap">

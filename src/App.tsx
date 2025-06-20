@@ -1,5 +1,5 @@
 import "./App.css";
-import { motion } from "motion/react";
+import { motion, MotionProps } from "motion/react";
 import { twMerge } from "tailwind-merge";
 import {
   DiGithubBadge,
@@ -23,17 +23,23 @@ import Marquee from "react-fast-marquee";
 import { LiaNodeJs } from "react-icons/lia";
 import { PiFileCpp } from "react-icons/pi";
 import { BiLogoMongodb } from "react-icons/bi";
-import Footer from "./Common/Footer";
+import Footer from "./components/footer";
 import { useState } from "react";
-import Header from "./Common/Header";
-import { dp } from "./Data/displaypic";
+import Header from "./components/header";
+import { dp } from "@/Data/displaypic";
 import { projectData } from "./Data/project-details";
 import { Link } from "react-router-dom";
+import { Avatar } from "@/components/ui/avatar";
+import {
+  AvatarGroup,
+  AvatarGroupTooltip,
+} from "@/components/animate-ui/components/avatar-group";
+import RotatingText from "@/components/RotatingText";
+
 // import { a } from "motion/react-client"
 function App() {
   return (
     <div className="cont bg-zinc-950 px-4 pt-8 pb-2 text-zinc-50">
-      {/* <div class="absolute bottom-0 left-0 right-0 top-0 bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f2e_1px,transparent_1px)] bg-[size:60px_60px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]"></div> */}
       <Header />
       <motion.div
         initial="initial"
@@ -58,11 +64,11 @@ function App() {
 
 export default App;
 
-// type Props = {
-//   className?: string,
-// } & MotionProps;
+type Props = {
+  className?: string;
+} & MotionProps;
 
-const Block = ({ className, ...rest }) => {
+const Block = ({ className, ...rest }: Props) => {
   return (
     <motion.div
       variants={{
@@ -97,20 +103,34 @@ const HeroBlock = () => {
   console.log(dp[displayPic].url);
 
   return (
-    <Block className="col-span-12 md:col-span-6 row-span-2 font-jakarta">
+    <Block className="col-span-12 md:col-span-6 row-span-2 font-jakarta transition-all duration-300 hover:translate-x-[-8px] hover:translate-y-[-8px] hover:rounded-md hover:shadow-[8px_8px_0px_white] active:translate-x-[0px] active:translate-y-[0px] active:rounded-2xl active:shadow-none">
       <img
         src={dp[displayPic].url}
         alt="avatar"
-        className="mb-4 size-16 rounded-full cursor-pointer"
+        className="mb-4 size-16 rounded-full cursor-pointer "
         onClick={() => setDisplayPic((displayPic + 1) % 3)}
       />
       <h1 className="mb-12 text-3xl font-medium leading-tight">
         Hi, I'm Abhay.{" "}
-        <span className="text-zinc-400">I'm a Fullstack Web Developer</span>
+        <span className="text-zinc-400">
+          I'm a{" "}
+          <RotatingText
+            texts={["Fullstack Web Developer", "Data Analyst", "Creator"]}
+            mainClassName="text-blue-400 overflow-hidden py-0.5 sm:py-1 md:py-2 rounded-lg"
+            staggerFrom={"last"}
+            initial={{ y: "100%" }}
+            animate={{ y: 0 }}
+            exit={{ y: "-120%" }}
+            staggerDuration={0.025}
+            splitLevelClassName="overflow-hidden pb-0.5 sm:pb-1 md:pb-1"
+            transition={{ type: "spring", damping: 30, stiffness: 400 }}
+            rotationInterval={2000}
+          />
+        </span>
       </h1>
-      <motion.a
-        href=""
-        className="flex items-center gap-1 text-red-300 hover-underline"
+      <Link
+        to={"/contact"}
+        className="flex items-center gap-1 text-blue-300 hover-underline"
       >
         Contact me{" "}
         <motion.span
@@ -128,7 +148,7 @@ const HeroBlock = () => {
         >
           <FaArrowRightLong className="text-lg" />
         </motion.span>
-      </motion.a>
+      </Link>
     </Block>
   );
 };
@@ -136,36 +156,18 @@ const HeroBlock = () => {
 const SocialBlock = () => {
   return (
     <>
-      <Block
-        whileHover={{
-          rotate: "2.5deg",
-          scale: 1.1,
-        }}
-        whileTap={{
-          rotate: "2.5deg",
-          scale: 1.1,
-        }}
-        className="col-span-6 md:col-span-3  shadow-zinc-500 shadow-sm"
-      >
+      <Block className="col-span-6 md:col-span-3  transition-all duration-300 hover:translate-x-[-8px] hover:translate-y-[-8px] hover:rounded-md hover:shadow-[8px_8px_0px_white] active:translate-x-[0px] active:translate-y-[0px] active:rounded-2xl active:shadow-none">
         <a
+          target="_blank"
           href="https://github.com/Abhay619"
           className="grid h-full place-content-center text-4xl text-white"
         >
           <DiGithubBadge />
         </a>
       </Block>
-      <Block
-        whileHover={{
-          rotate: "-2.5deg",
-          scale: 1.1,
-        }}
-        whileTap={{
-          rotate: "2.5deg",
-          scale: 1.1,
-        }}
-        className="col-span-6 md:col-span-3   shadow-zinc-500 shadow-sm"
-      >
+      <Block className="col-span-6 md:col-span-3  transition-all duration-300 hover:translate-x-[-8px] hover:translate-y-[-8px] hover:rounded-md hover:shadow-[8px_8px_0px_white] active:translate-x-[0px] active:translate-y-[0px] active:rounded-2xl active:shadow-none">
         <a
+          target="_blank"
           href="https://www.linkedin.com/in/abhaykumar619/"
           className="grid h-full place-content-center text-3xl text-white"
         >
@@ -173,17 +175,10 @@ const SocialBlock = () => {
         </a>
       </Block>
       <Block
-        whileHover={{
-          rotate: "-2.5deg",
-          scale: 1.1,
-        }}
-        whileTap={{
-          rotate: "2.5deg",
-          scale: 1.1,
-        }}
-        className="col-span-6 md:col-span-3  shadow-zinc-500 shadow-sm"
+        className="col-span-6 md:col-span-3  transition-all duration-300 hover:translate-x-[-8px] hover:translate-y-[-8px] hover:rounded-md hover:shadow-[8px_8px_0px_white] active:translate-x-[0px] active:translate-y-[0px] active:rounded-2xl active:shadow-none"
       >
         <a
+          target="_blank"
           href="https://www.instagram.com/meabhayk/"
           className="grid h-full place-content-center text-3xl text-white"
         >
@@ -191,17 +186,10 @@ const SocialBlock = () => {
         </a>
       </Block>
       <Block
-        whileHover={{
-          rotate: "2.5deg",
-          scale: 1.1,
-        }}
-        whileTap={{
-          rotate: "2.5deg",
-          scale: 1.1,
-        }}
-        className="col-span-6 md:col-span-3 bg-black-500  shadow-zinc-500 shadow-sm"
+        className="col-span-6 md:col-span-3  transition-all duration-300 hover:translate-x-[-8px] hover:translate-y-[-8px] hover:rounded-md hover:shadow-[8px_8px_0px_white] active:translate-x-[0px] active:translate-y-[0px] active:rounded-2xl active:shadow-none"
       >
         <a
+          target="_blank"
           href="https://x.com/AbhayKDhuriya"
           className="grid h-full place-content-center text-4xl text-white"
         >
@@ -214,7 +202,7 @@ const SocialBlock = () => {
 
 const LocationBlock = () => {
   return (
-    <Block className="col-span-12 flex flex-col items-center justify-center gap-4 md:col-span-3">
+    <Block className="col-span-12 flex flex-col items-center justify-center gap-4 md:col-span-3 transition-all duration-300 hover:translate-x-[-8px] hover:translate-y-[-8px] hover:rounded-md hover:shadow-[8px_8px_0px_white] active:translate-x-[0px] active:translate-y-[0px] active:rounded-2xl active:shadow-none">
       <motion.span
         initial={{
           scale: 1,
@@ -242,8 +230,8 @@ const LocationBlock = () => {
 };
 const AboutBlock = () => {
   return (
-    <Block className="relative col-span-12 flex flex-col items-center gap-4 md:col-span-9 text-xl font-manrope cursor-default">
-      <p className="opacity-1">
+    <Block className="relative col-span-12 flex flex-col items-center gap-4 md:col-span-9 text-xl font-jakarta cursor-default transition-all duration-300 hover:translate-x-[-8px] hover:translate-y-[-8px] hover:rounded-md hover:shadow-[8px_8px_0px_white] active:translate-x-[0px] active:translate-y-[0px] active:rounded-2xl active:shadow-none">
+      <p className="">
         I like learning and building cool tech.{" "}
         <span className="text-zinc-400">
           I create sleek, fast, and responsive websites using React, Tailwind
@@ -256,8 +244,11 @@ const AboutBlock = () => {
 };
 const TechStackBlock = () => {
   return (
-    <Block className="col-span-12 flex flex-col text-left gap-8 md:col-span-12 text-xl">
-      <h2 className="text-4xl font-semibold">My Tech Stack<span className="inline-block animate-blink">_</span></h2>
+    <Block className="col-span-12 flex flex-col text-left gap-8 md:col-span-12 text-xl transition-all duration-300 hover:translate-x-[-8px] hover:translate-y-[-8px] hover:rounded-md hover:shadow-[8px_8px_0px_white] active:translate-x-[0px] active:translate-y-[0px] active:rounded-2xl active:shadow-none">
+      <h2 className="text-4xl font-semibold">
+        My Tech Stack
+        <span className="inline-block animate-blink animate-pulse">_</span>
+      </h2>
       <div className="flex flex-col gap-1 cursor-pointer">
         <Marquee
           pauseOnHover
@@ -322,8 +313,11 @@ const TechStackBlock = () => {
 };
 const ExperienceBlock = () => {
   return (
-    <Block className="relative col-span-12 flex flex-col text-left gap-8 md:col-span-12 text-xl font-jakarta">
-      <h2 className="text-4xl font-semibold">Experience<span className="inline-block animate-blink">_</span></h2>
+    <Block className="relative col-span-12 flex flex-col text-left gap-8 md:col-span-12 text-xl font-jakarta transition-all duration-300 hover:translate-x-[-8px] hover:translate-y-[-8px] hover:rounded-md hover:shadow-[8px_8px_0px_white] active:translate-x-[0px] active:translate-y-[0px] active:rounded-2xl active:shadow-none">
+      <h2 className="text-4xl font-semibold">
+        Experience
+        <span className="inline-block animate-blink animate-pulse">_</span>
+      </h2>
 
       <div className="relative experience flex flex-col gap-12 p-4">
         <div className="milestones flex flex-col gap-1">
@@ -361,23 +355,26 @@ const ProjectBlock = () => {
       scale: 1.2,
       transition: { type: "spring", stiffness: 300, damping: 10 },
     },
-    tap:{
+    tap: {
       rotate: -50,
       scale: 1.2,
       transition: { type: "spring", stiffness: 300, damping: 10 },
-    }
+    },
   };
-  console.log(projectData.Technologies);
+  console.log(projectData[0].Technologies);
   return (
-    <Block className="col-span-12 flex flex-col text-left items-center gap-4 md:col-span-12 text-xl rounded-lg font-jakarta">
-      <h2 className="text-4xl font-semibold self-start">Projects<span className="inline-block animate-blink">_</span></h2>
+    <Block className="col-span-12 flex flex-col text-left items-center gap-4 md:col-span-12 text-xl rounded-lg font-jakarta ">
+      <h2 className="text-4xl font-semibold self-start">
+        Projects<span className="inline-block animate-blinks">_</span>
+      </h2>
       <span className="text-zinc-400 font-marope">
-         Here’s what I’ve been building — ideas turned into interactive, functional apps using my favorite tech stack.
-        </span>
+        Here’s what I’ve been building — ideas turned into interactive,
+        functional apps using my favorite tech stack.
+      </span>
       <div className="flex flex-col  gap-8 my-6">
-        {projectData.slice(0,2).map((v, i) => {
+        {projectData.slice(0, 2).map((v, i) => {
           return (
-            <a href={v.url}>
+            <a target="_blank" href={v.url}>
               <motion.div
                 className="group relative w-full h-72 md:h-[400px] rounded-xl overflow-hidden bg-black/10 shadow-inner"
                 style={{
@@ -410,13 +407,20 @@ const ProjectBlock = () => {
                   </h2>
                   {/* Tech stack badges */}
                   <div className="flex flex-wrap gap-2 mb-2 relative">
-                    {v.Technologies.map((Icon, i) => (
-                      <span className="bg-black w-10 justify-center text-md py-1 rounded flex items-center  ">
-                        <Icon />
-                      </span>
-                    ))}
-                  </div>
+                    <AvatarGroup>
+                      {v.Technologies.map((technology, index) => (
+                        <Avatar key={index}>
+                          <span className="bg-black w-10 text-white justify-center text-md py-1 rounded flex items-center  ">
+                            <technology.icon />
+                          </span>
 
+                          <AvatarGroupTooltip>
+                            <p>{technology.tooltip}</p>
+                          </AvatarGroupTooltip>
+                        </Avatar>
+                      ))}
+                    </AvatarGroup>
+                  </div>
                   <p className="text-sm text-zinc-400 text-wrap">
                     {v.description}
                   </p>
@@ -425,7 +429,12 @@ const ProjectBlock = () => {
             </a>
           );
         })}
-        <Link to={'/projects'} className="text-2xl font-semibold text-zinc-500 hover:text-zinc-200">More...</Link>
+        <Link
+          to={"/projects"}
+          className="text-2xl font-semibold text-zinc-500 hover:text-zinc-200"
+        >
+          More...
+        </Link>
       </div>
     </Block>
   );
