@@ -86,7 +86,7 @@ const ProjectBlock = () => {
       <div className="flex flex-col w-full gap-8 my-6">
         {projectData.map((v, i) => {
           return (
-            <a href="">
+            <a target="_blank" href={v.url}>
               <motion.div
                 className="group relative w-full h-72 md:h-[450px] rounded-xl overflow-hidden bg-black/10 shadow-inner"
                 style={{
