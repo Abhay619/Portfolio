@@ -1,7 +1,7 @@
 import { motion } from "motion/react";
 import { twMerge } from "tailwind-merge";
 import Header from "../components/header";
-import Footer from "../components/Footer";
+import Footer from "../components/footer";
 import { FiMail } from "react-icons/fi";
 import { IoCallOutline } from "react-icons/io5";
 import Orb from '../components/Orb';
